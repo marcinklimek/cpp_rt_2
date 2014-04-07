@@ -6,7 +6,7 @@
 
 using namespace std;
 
-struct thrad_data
+struct thread_data
 {
 
 };
@@ -40,7 +40,7 @@ int main()
 
 
     int return_value;
-    pthread_join(tid, (void**)&return_value);
+    //pthread_join(tid, (void**)&return_value);
 
     std::cout << "main - ret value " << value << " " << return_value << std::endl;
 
