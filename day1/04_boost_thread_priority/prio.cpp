@@ -52,6 +52,24 @@ void displayAndChange(boost::thread& daThread)
 }
 
 
+void foo_th(int x, char* c)
+{
+
+
+}
+
+class Foo
+{
+public:
+
+    void operator()
+    {
+        
+    }
+}
+
+
+
 int main(int argc, char* argv[])
 {
     int policy, res;
