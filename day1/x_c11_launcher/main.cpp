@@ -34,23 +34,23 @@ int main()
     pthread_t id;
 
     launch_thread(&id, std::bind(run, 10, std::ref(value) ));
+    pthread_join(id, NULL);
+    std::cout << value << std::endl;
 
     pthread_t id2;
 
     Foo f(10);
     launch_thread(&id2, f);
     
-    pthread_join(id, NULL);
+    pthread_join(id2, NULL);
 
     pthread_t id3;
 
-    auto func = []() { };
+    auto func = []() { std::cout << "from lambda" <<std::endl; };
 
     launch_thread(&id3, func );
+    pthread_join(id3, NULL);
 
-
-
-    std::cout << value << std::endl;
     return 0;
 }
 
