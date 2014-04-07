@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/05_mutex.dir/pthread_mutex_perf.cpp.o  -o 05_mutex -rdynamic -lstdc++ -lpthread 
