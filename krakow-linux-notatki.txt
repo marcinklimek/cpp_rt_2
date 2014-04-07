@@ -1,0 +1,114 @@
+# login haslo
+
+   devel  /  dev 
+
+
+# reinstalacja dodatków do VBox
+
+    sudo /etc/init.d/vboxadd setup
+
+
+# ustawienie proxy
+
+    Najwygodniej jest dodac wpis w pliku .profile
+
+    export http_proxy=http://10.144.1.10:8080
+    export https_proxy=https://10.144.1.10:8080
+
+
+# ustawienie proxy dla APT
+
+    /etc/apt/apt.conf
+
+    Acquire::http::proxy "http://10.144.1.10:8080/";
+    Acquire::https::proxy "https://10.144.1.10:8080/";
+    Acquire::ftp::proxy "ftp://10.144.1.10:8080/";
+
+
+# test polaczenia
+
+    ping 8.8.8.8 # przy zalozeniu, ze ICMP nie jest blokowane
+    curl -v http://www.example.com/
+
+
+# git
+
+    https://github.com/marcinklimek/cpp_rt_2.git
+
+
+    git-cheat-sheet
+    http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf
+
+    git status  # status lokalnego repozytorium
+    git pull    # pobranie plikow z repozytorium
+    git stash   # przeniesienie modyfikacji do schowka
+
+
+# usatwienie grupy RT
+
+
+    Aby móc nadawać wątkom priorytety real-time należy obniżyć limity
+    bezpieczeństwa
+
+       twoj_ulubiony_edytor /etc/security/limits.d/99-rt.conf
+
+    w którym ustawiamy limity dla grupy "realtime":
+
+       @realtime   -  rtprio     99
+       @realtime   -  memlock    unlimited
+
+    a następnie tworzymy tę grupę i dodajemy naszego użytkownika:
+
+       groupadd realtime
+       usermod -a -G realtime twoja_nazwa
+
+       chrt -p PRIORYTET PID
+       man chrt
+
+# linki
+
+	sortowanie i branch prediction:
+	http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array
+
+	what every programmer should know about memory:
+	http://lwn.net/Articles/250967/
+
+
+# IPC SysV
+
+  //QUEUE
+  msgctl( msqid, IPC_RMID, 0 );
+
+  //SEM
+  semctl( semid, 0, IPC_RMID );
+
+  //SHMEM
+  shmctl(shmid, IPC_RMID, 0);   
+
+
+
+git clone https://github.com/marcinklimek/cpp_rt_2.git
+
+# kompilacja
+    
+    g++ main.cpp -o prg -lpthread -std=c++11
+    ./prg
+
+#cmake instalacja
+
+   sudo apt-get install cmake
+
+# cmake
+
+  jestesmy w katalogu CMakeLists.txt
+
+    mkdir build
+    cd build
+    cmake ..
+    make
+
+    ./<nasz program>
+
+# netcat
+
+ sudo  apt-get install netcat-openbsd
