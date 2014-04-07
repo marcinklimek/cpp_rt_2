@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
@@ -12,7 +13,28 @@
 
 long licznik = 0;		// global counter
 
-pthread_mutex_t blokada;
+pthread_mutex_t blokada = PTHREAD_MUTEX_INITIALIZER;
+
+
+class lock_guard
+{
+    pthread_mutex_t &lock_;
+
+public:
+
+    lock_guard(pthread_mutex_t &lock) : lock_(lock)
+    {
+        std::cout << "lock" << std::endl;
+        pthread_mutex_lock( &lock_ );
+    }
+
+
+    ~lock_guard()
+    {
+        std::cout << "unlock" << std::endl;
+        pthread_mutex_unlock( &lock_ );
+    }
+};
 
 
 void* worker(void* numer)
@@ -22,9 +44,9 @@ void* worker(void* numer)
 
     for (i=0; i < K; i++)
     {
-        pthread_mutex_lock(&blokada);
+        lock_guard lk(blokada);
+
         licznik = licznik + 1;
-        pthread_mutex_unlock(&blokada);
 
         sched_yield();
     }
@@ -40,8 +62,6 @@ int main()
     
     errno = pthread_mutex_init( &blokada, NULL );
     test_errno("pthread mutex init");
-
-
 
     for (i=0; i < N; i++)
     {
@@ -61,6 +81,8 @@ int main()
            N*K,
            (licznik != N*K ? "error!" : "ok")
           );
+
+    pthread_mutex_destroy( &blokada );
 
     return EXIT_SUCCESS;
 }

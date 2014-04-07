@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/info/work/cpp_rt_2/day1/05_mutex/pthread_mutex_perf.cpp
+iostream
+-
+stdlib.h
+-
+stdio.h
+-
+pthread.h
+-
+errno.h
+-
+sched.h
+-
+
