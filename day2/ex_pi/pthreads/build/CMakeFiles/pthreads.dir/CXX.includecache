@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/info/work/cpp_real_time/tier2/day_by_day/threads/ex_pi/pthreads/pi.cpp
+iostream
+-
+cstdlib
+-
+iomanip
+-
+pthread.h
+-
+chrono
+-
+functional
+-
+memory
+-
+vector
+-
+algorithm
+-
+random
+-
+
