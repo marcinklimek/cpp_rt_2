@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/pthreads.dir/pi.cpp.o  -o pthreads -rdynamic -lstdc++ -lgomp -lpthread 
