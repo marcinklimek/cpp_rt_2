@@ -6,8 +6,8 @@ using namespace std;
 int main()
 {
     cout << "Start logging" << endl;
-    //Logger l;
-    LoggerAsync l;
+    Logger l;
+    //LoggerAsync l;
     l.message("Hello World");
     l.message("Message 1");
     l.message("Message 2");
