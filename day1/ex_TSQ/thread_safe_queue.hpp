@@ -8,10 +8,20 @@ template<typename T>
 class thread_safe_queue
 {
     std::queue<T> q;
+    pthread_mutex_t mutex_;
+
 
 public:
     thread_safe_queue()
     {
+        pthread_mutexattr_t mutex_attr;
+        pthread_mutexattr_init( &mutex_attr );
+
+        pthread_mutexattr_settype( &mutex_attr, PTHREAD_MUTEX_RECURSIVE );
+
+        pthread_mutex_init( &mutex_, &mutex_attr);
+
+        pthread_mutexattr_destroy(&mutex_attr);
     }
 
     void pop(T& item)

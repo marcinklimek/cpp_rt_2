@@ -33,8 +33,7 @@
 
 # git
 
-    https://github.com/marcinklimek/cpp_rt_2.git
-
+    git clone https://github.com/marcinklimek/cpp_rt_2.git
 
     git-cheat-sheet
     http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf
@@ -87,7 +86,7 @@
 
 
 
-git clone https://github.com/marcinklimek/cpp_rt_2.git
+
 
 # kompilacja
     

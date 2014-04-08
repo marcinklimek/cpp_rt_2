@@ -55,7 +55,9 @@ int main(int argc, char **argv)
     q.pop(i);
     std::cout << "val: " << i << std::endl;
 
-    producer( q, NUM_ITERATIONS, NUM_CONSUMERS);
+    pthread_t tid;
+    //  producer( q, NUM_ITERATIONS, NUM_CONSUMERS);
+    launch_thread( &tid, std::bind( producer, std::ref(q), NUM_ITERATIONS, NUM_CONSUMERS  )  );
 
     for(int i = 0; i < NUM_CONSUMERS; ++i)
         consumer( q );
