@@ -55,6 +55,7 @@ void* thread_02(void* num)
         n = 1000000;
         for (i=0; i < n; i++);
 
+        printf("pthread_testcancel\n");
         pthread_testcancel();   // interruption point
     }
 
@@ -79,12 +80,12 @@ void* thread_03(void* num)
     test_errno("pthread_setcancelstate");
     pause();
 
-    pthread_cleanup_pop(1);
+    //pthread_cleanup_pop(1);
     return NULL;
 }
 //------------------------------------------------------------------------
 
-void interrupt(pthread_t id, const char* napi)
+void interrupt(pthread_t id, const char* napis)
 {
     struct timespec tim;
     tim.tv_sec = 0;

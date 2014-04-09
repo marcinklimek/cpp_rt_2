@@ -62,7 +62,7 @@ int main()
    
     for (i=0; i < NUM_THREADS; i++)
     {
-        errno = pthread_create(&id[i], NULL, thread, (void*)i);
+        errno = pthread_create(&id[i], NULL, thread, NULL);
         test_errno("pthread_create");
     }
 

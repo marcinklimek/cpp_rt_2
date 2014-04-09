@@ -21,18 +21,18 @@ pthread_rwlock_t	rw_lock;
 
 void* writer(void* arg)
 {
-    int* number = (int*)arg;
+    int number = (int)(ssize_t)arg;
 
     while (1)
     {
-        printf(" writer #%d - wait\n", *number);
+        printf(" writer #%d - wait\n", number);
         errno = pthread_rwlock_wrlock(&rw_lock);
         test_errno("pthread_rwlock_wrlock");
-        printf(" writer #%d set a new value\n", *number);
+        printf(" writer #%d set a new value\n", number);
 
         ms_sleep(113);
 
-        printf(" writer #%d unlock\n", *number);
+        printf(" writer #%d unlock\n", number);
         errno = pthread_rwlock_unlock(&rw_lock);
         test_errno("pthread_rwlock_unlock");
 
@@ -46,19 +46,19 @@ void* writer(void* arg)
 
 void* reader(void* arg)
 {
-    int* number = (int*)arg;
+    int number = (int)(ssize_t)arg;
 
     int errno;
     while (1)
     {
-        printf("  reader #%d waiting for access\n", *number);
+        printf("  reader #%d waiting for access\n", number);
         errno = pthread_rwlock_rdlock(&rw_lock);
         test_errno("pthread_rwlock_rdlock");
-        printf("  reader #%d read a value\n", *number);
+        printf("  reader #%d read a value\n", number);
 
         ms_sleep(13);
 
-        printf("  reader #%d unlock\n", *number);
+        printf("  reader #%d unlock\n", number);
         errno = pthread_rwlock_unlock(&rw_lock);
         test_errno("pthread_rwlock_unlock");
 
@@ -69,8 +69,8 @@ void* reader(void* arg)
 }
 //------------------------------------------------------------------------
 
-#define N 5
-#define K 2
+#define N 2
+#define K 1
 
 int main_example_01()
 {
@@ -82,13 +82,13 @@ int main_example_01()
 
     for (i=0; i < K; i++)
     {
-        errno = pthread_create(&id, NULL, writer, (void*)&i);
+        errno = pthread_create(&id, NULL, writer, (void*)(ssize_t)i);
         test_errno("pthread_create");
     }
 
     for (i=0; i < N; i++)
     {
-        errno = pthread_create(&id, NULL, reader, (void*)&i);
+        errno = pthread_create(&id, NULL, reader, (void*)(ssize_t)i);
         test_errno("pthread_create");
     }
 
@@ -263,5 +263,5 @@ int main_example_02()
 
 int main()
 {
-    main_example_02();
+    main_example_01();
 }
